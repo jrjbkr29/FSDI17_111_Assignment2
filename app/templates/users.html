@@ -32,7 +32,7 @@
                         <p>ID <input type = "text" name = "id" disabled value={{ "{}".format(user.id) }}></p>
                         <p>First Name <input required type = "text" name = "first_name" value={{ "{}".format(user.first_name) }} /></p>
                         <p>Last Name <input required type = "text" name = "last_name" value={{ "{}".format(user.last_name) }} /></p>
-                        <p>Hobbies <input type = "text" size=50 name = "hobbies" value={{ "{}".format(user.hobbies) }} ></p>
+                        <p>Hobbies <input type = "text" name = "hobbies" value="{{ '{}'.format(user.hobbies) }}" ></p>
                         <p><input type = "submit" value = "Update" /></p>
                      </form>
                         <form action = {{ "http://localhost:5000/user/delete/{}".format(user.id) }} method = "POST">

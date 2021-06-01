@@ -52,9 +52,9 @@ def delete():
     cursor.commit()
 
 def delete_user(id):
-    sql = 'DELETE FROM user WHERE id={}'.format(id)
+    delete_usr = 'DELETE FROM user WHERE id={}'.format(id)
     cursor = get_db()
-    cursor.execute(sql)
+    cursor.execute(delete_usr)
     cursor.commit()
 
 def update_user(id, first_name, last_name, hobbies):

@@ -36,9 +36,7 @@ def delete_users():
 
 @app.route("/user/delete/<int:user_id>", methods=["POST"])   
 def delete_usr(user_id):
-    user_id = request.form
-    id = (user_id.get("id"))
-    print(id)
+    id=user_id
     delete_user(id)
     return "<h2>Successfully DELETED user</h2><a class='navbar-brand' href='/'>My App</a>"
 
