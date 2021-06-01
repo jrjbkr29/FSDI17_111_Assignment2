@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Users{% endblock title %}
+
+{% block content %}
+<div class ="container">
+   <h2>Success! ID: {{ new_id }}</h2>
+    <table border = 1>
+      {% for key, value in result.items() %}
+
+      <tr>
+         <th> {{ key }} </th>
+         <td> {{ value }} </td>
+      </tr>
+  
+      {% endfor %}
+   </table>
+</div>
+{% endblock content %}

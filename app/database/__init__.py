@@ -19,9 +19,9 @@ def output_formatter(results: tuple):
     for result in results:
         res_dict = {}
         res_dict["id"] = results[0]
-        res_dict["first_name"] = result[1]
-        res_dict["last_name"] = result[2]
-        res_dict["hobbies"] = result[3]
+        res_dict["first_name"] = results[1]
+        res_dict["last_name"] = results[2]
+        res_dict["hobbies"] = results[3]
         out.append(res_dict)
     return out
 
@@ -32,14 +32,21 @@ def scan():
     return output_formatter(results)
 
 def create(first_name, last_name, hobbies):
-    value_tuple = (first_name, last_name,hobbies)
+    value_tuple = (first_name, last_name, hobbies)
     query = """
             INSERT into user (
                 first_name,
                 last_name,
                 hobbies
-            ) VALUE (?, ?, ?)
-            """
+            ) VALUES (?, ?, ?)
+        """
     cursor = get_db()
-    last_row_id = cursor.execute(query, value_tuple).lastrowidcursor.commit()
+    last_row_id = cursor.execute(query, value_tuple).lastrowid
+    cursor.commit()
     return last_row_id
+
+def delete():
+    sql = 'DELETE FROM tasks'
+    cursor = get_db()
+    cursor.execute(sql)
+    cursor.commit()

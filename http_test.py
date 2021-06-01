@@ -17,8 +17,11 @@ def create():
         "last_name": "Doe",
         "hobbies": "playing hockey"
     }
-    out = requests.post(url, json= test_data)
-    pprint(out.json())
+    out = requests.post(url, json=test_data)
+    try:
+        pprint(out.json())
+    except Exception:
+        pprint(out.text)
 
 if __name__ == "__main__":
     print("Scan request:")
