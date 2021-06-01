@@ -57,15 +57,16 @@ def delete_user(id):
     cursor.execute(sql)
     cursor.commit()
 
-def update_user(id,first_name, last_name, hobbies):
+def update_user(id, first_name, last_name, hobbies):
     sql = """ UPDATE user
-            SET first_name = ? ,
-                last_name = ? ,
-                hobbies = ?
-            WHERE id={}""".format(id)
-    value_tuple = (first_name, last_name, hobbies)
+            SET first_name = '{}',
+                last_name = '{}',
+                hobbies = '{}'
+            WHERE id={}""".format(first_name, last_name, hobbies, id)
+    print(sql)
     cursor = get_db()
-    cursor.execute(sql, value_tuple)
+    print(cursor)
+    cursor.execute(sql)
     cursor.commit()
 
    

@@ -27,11 +27,7 @@ def create_user():
         user_data.get("hobbies")
     )
     return render_template("result.html", result=user_data, new_id=new_id)
-    #{
-        #"ok": True,
-        #"message": "Success",
-        #"new_id": new_id
-      #}
+
 
 @app.route("/users/delete", methods=["POST"])   
 def delete_users():
@@ -46,14 +42,14 @@ def delete_usr(user_id):
     delete_user(id)
     return "<h2>Successfully DELETED user</h2><a class='navbar-brand' href='/'>My App</a>"
 
-@app.route("/user/update", methods=["POST"])   
-def update_usr():
+@app.route("/user/update/<id>", methods=["POST"])   
+def update_usr(id):
     user_data = request.form
     print(user_data)
     user_update = update_user(
-        user_data.get("id"),
+        id,
         user_data.get("first_name"),
         user_data.get("last_name"),
         user_data.get("hobbies")
         )
-    return "<h2>Successfully DELETED user</h2><a class='navbar-brand' href='/'>My App</a>"
+    return "<h2>Successfully Updated user</h2><a class='navbar-brand' href='/'>My App</a>"
