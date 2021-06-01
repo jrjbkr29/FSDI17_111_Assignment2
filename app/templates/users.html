@@ -1,18 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}Not Found{% endblock title %}
+{% block title %}Users{% endblock title %}
 
 {% block content %}
 <div class ="container">
+    <h2>Create new User</h2>
     <form action = "http://localhost:5000/new_user" method = "POST">
         <p>First Name <input type = "text" name = "first_name" /></p>
         <p>Last Name <input type = "text" name = "last_name" /></p>
         <p>Hobbies <input type = "text" name = "hobbies" /></p>
-        <p><input type = "submit" value = "submit" /></p>
+        <p><input type = "submit" value = "Submit" /></p>
      </form>
-     <button action = "http://localhost:5000/users/delete" method = "POST">DELETE</button>
 
-     {{ users }}
+    <div class="row">
+        <div class="col-4">
+          <div class="list-group" id="list-tab" role="tablist">
+            <h3>Existing Users</h3>
+            <form action = "http://localhost:5000/users/delete" method = "POST">
+                <p><input type = "submit" value = "Delete All USERS" /></p>
+            </form>
+            {% for user in users %}
+                <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href={{ "#list-{}".format(user.first_name|e) }} role="tab" aria-controls= {{ "list-{}".format(user.first_name|e) }}>{{ user.first_name|e }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="tab-content" id="nav-tabContent">
+            {% for user in users %}
+                <div class="tab-pane fade" id={{ "list-{}".format(user.first_name|e) }} role="tabpanel" aria-labelledby="list-home-list">
+                    <form action = "http://localhost:5000/user/update" method = "POST">
+                        <p>ID <input type = "text" name = "id" disabled value={{ "{}".format(user.id) }}></p>
+                        <p>First Name <input type = "text" name = "first_name" value={{ "{}".format(user.first_name) }} /></p>
+                        <p>Last Name <input type = "text" name = "last_name" value={{ "{}".format(user.last_name) }} /></p>
+                        <p>Hobbies <input type = "text" name = "hobbies" value={{ "{}".format(user.hobbies) }} /></p>
+                        <p><input type = "submit" value = "Update" /></p>
+                     </form>
+                        <form action = {{ "http://localhost:5000/user/delete/{}".format(user.id) }} method = "POST">
+                        <p><input type = "submit" value = "Delete User" /></p>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+  </div>
 
 </div>
 {% endblock content %}

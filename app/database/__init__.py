@@ -18,10 +18,10 @@ def output_formatter(results: tuple):
     out = []
     for result in results:
         res_dict = {}
-        res_dict["id"] = results[0]
-        res_dict["first_name"] = results[1]
-        res_dict["last_name"] = results[2]
-        res_dict["hobbies"] = results[3]
+        res_dict["id"] = result[0]
+        res_dict["first_name"] = result[1]
+        res_dict["last_name"] = result[2]
+        res_dict["hobbies"] = result[3]
         out.append(res_dict)
     return out
 
@@ -46,7 +46,26 @@ def create(first_name, last_name, hobbies):
     return last_row_id
 
 def delete():
-    sql = 'DELETE FROM tasks'
+    sql = 'DELETE FROM user'
     cursor = get_db()
     cursor.execute(sql)
     cursor.commit()
+
+def delete_user(id):
+    sql = 'DELETE FROM user WHERE id={}'.format(id)
+    cursor = get_db()
+    cursor.execute(sql)
+    cursor.commit()
+
+def update_user(id,first_name, last_name, hobbies):
+    sql = """ UPDATE user
+            SET first_name = ? ,
+                last_name = ? ,
+                hobbies = ?
+            WHERE id={}""".format(id)
+    value_tuple = (first_name, last_name, hobbies)
+    cursor = get_db()
+    cursor.execute(sql, value_tuple)
+    cursor.commit()
+
+   
